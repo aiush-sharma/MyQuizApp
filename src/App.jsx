@@ -173,7 +173,9 @@ function App() {
     navigator.clipboard
       .writeText(room.code)
       .then(() => setCopied(true))
-      .catch(() => setError("Couldn't copy the code. Please copy it manually."));
+      .catch(() =>
+        setError("Couldn't copy the code. Please copy it manually."),
+      );
   }
 
   function leaveGame() {
@@ -196,7 +198,9 @@ function App() {
           <span className="brand-icon">
             <Gamepad2 size={17} strokeWidth={2.2} />
           </span>
-          <span>quiz<span className="brand-light">club</span></span>
+          <span>
+            Mero<span className="brand-light">Quiz</span>
+          </span>
         </button>
         <div className="topbar-right">
           {room ? (
@@ -228,11 +232,17 @@ function App() {
                 quickest quiz night wins bragging rights.
               </p>
               <div className="feature-row">
-                <span><Clock3 size={15} /> 10 seconds per question</span>
-                <span><Sparkles size={15} /> 10 points for a right answer</span>
+                <span>
+                  <Clock3 size={15} /> 10 seconds per question
+                </span>
+                <span>
+                  <Sparkles size={15} /> 10 points for a right answer
+                </span>
               </div>
               <div className="home-stamp">
-                <span className="stamp-icon"><Radio size={17} /></span>
+                <span className="stamp-icon">
+                  <Radio size={17} />
+                </span>
                 <span>
                   <strong>Made for your crew</strong>
                   <small>Live games · Up to 3 players</small>
@@ -262,13 +272,21 @@ function App() {
                 value={username}
               />
 
-              <button className="primary-button create-button" onClick={createGame} type="button">
+              <button
+                className="primary-button create-button"
+                onClick={createGame}
+                type="button"
+              >
                 Create a game <ArrowRight size={17} />
               </button>
 
-              <div className="divider"><span>OR JOIN A FRIEND</span></div>
+              <div className="divider">
+                <span>OR JOIN A FRIEND</span>
+              </div>
               <form className="join-form" onSubmit={joinGame}>
-                <label className="visually-hidden" htmlFor="game-code">Game code</label>
+                <label className="visually-hidden" htmlFor="game-code">
+                  Game code
+                </label>
                 <input
                   autoCapitalize="characters"
                   className="text-input code-input"
@@ -289,8 +307,14 @@ function App() {
                   <ArrowRight size={18} />
                 </button>
               </form>
-              {error && <p aria-live="polite" className="error-message">{error}</p>}
-              <p className="entry-footnote"><Users size={13} /> The game begins when all 3 seats are filled.</p>
+              {error && (
+                <p aria-live="polite" className="error-message">
+                  {error}
+                </p>
+              )}
+              <p className="entry-footnote">
+                <Users size={13} /> The game begins when all 3 seats are filled.
+              </p>
             </div>
           </section>
         )}
@@ -298,10 +322,18 @@ function App() {
         {mode === "lobby" && room && (
           <section className="lobby-layout">
             <div className="lobby-heading">
-              <div className="eyebrow"><span className="eyebrow-line" /> ROOM IS OPEN</div>
-              <h1>Call your<br /><span>people</span><span className="period">.</span></h1>
+              <div className="eyebrow">
+                <span className="eyebrow-line" /> ROOM IS OPEN
+              </div>
+              <h1>
+                Call your
+                <br />
+                <span>people</span>
+                <span className="period">.</span>
+              </h1>
               <p className="home-description">
-                Share the code. As soon as the third player joins, the quiz kicks off.
+                Share the code. As soon as the third player joins, the quiz
+                kicks off.
               </p>
               <button className="text-button" onClick={leaveGame} type="button">
                 <ArrowLeft size={15} /> Leave room
@@ -311,34 +343,68 @@ function App() {
               <div className="card-kicker">YOUR GAME CODE</div>
               <div className="code-share-row">
                 <span className="room-code">{room.code}</span>
-                <button className="copy-button" onClick={copyCode} type="button">
+                <button
+                  className="copy-button"
+                  onClick={copyCode}
+                  type="button"
+                >
                   {copied ? <Check size={15} /> : <Copy size={15} />}
                   {copied ? "Copied" : "Copy"}
                 </button>
               </div>
               <div className="player-list-heading">
                 <span>PLAYERS IN THE ROOM</span>
-                <span>{room.players.length}<i> / {room.maxPlayers}</i></span>
+                <span>
+                  {room.players.length}
+                  <i> / {room.maxPlayers}</i>
+                </span>
               </div>
               <div className="player-list">
                 {Array.from({ length: room.maxPlayers }, (_, index) => {
                   const player = room.players[index];
                   return (
-                    <div className={`player-row${player ? " player-joined" : " player-empty"}`} key={player?.id || index}>
-                      <span className="player-avatar">{player ? player.username.slice(0, 1).toUpperCase() : <Users size={15} />}</span>
-                      <span className="player-name">{player ? player.username : "Waiting for player..."}</span>
-                      {player?.id === myId ? <span className="you-tag">YOU</span> : null}
-                      {player && player.id !== myId ? <span className="joined-check"><Check size={13} /></span> : null}
-                      {!player ? <span className="seat-number">0{index + 1}</span> : null}
+                    <div
+                      className={`player-row${player ? " player-joined" : " player-empty"}`}
+                      key={player?.id || index}
+                    >
+                      <span className="player-avatar">
+                        {player ? (
+                          player.username.slice(0, 1).toUpperCase()
+                        ) : (
+                          <Users size={15} />
+                        )}
+                      </span>
+                      <span className="player-name">
+                        {player ? player.username : "Waiting for player..."}
+                      </span>
+                      {player?.id === myId ? (
+                        <span className="you-tag">YOU</span>
+                      ) : null}
+                      {player && player.id !== myId ? (
+                        <span className="joined-check">
+                          <Check size={13} />
+                        </span>
+                      ) : null}
+                      {!player ? (
+                        <span className="seat-number">0{index + 1}</span>
+                      ) : null}
                     </div>
                   );
                 })}
               </div>
               <div className="waiting-note">
                 <LoaderCircle className="spin" size={15} />
-                <span>{room.players.length < room.maxPlayers ? "Waiting for your crew to join..." : "Starting your game..."}</span>
+                <span>
+                  {room.players.length < room.maxPlayers
+                    ? "Waiting for your crew to join..."
+                    : "Starting your game..."}
+                </span>
               </div>
-              {error && <p aria-live="polite" className="error-message">{error}</p>}
+              {error && (
+                <p aria-live="polite" className="error-message">
+                  {error}
+                </p>
+              )}
             </div>
           </section>
         )}
@@ -349,24 +415,33 @@ function App() {
               <button className="text-button" onClick={leaveGame} type="button">
                 <DoorOpen size={15} /> Leave game
               </button>
-              <div className="quiz-room-code">ROOM <strong>{room.code}</strong></div>
+              <div className="quiz-room-code">
+                ROOM <strong>{room.code}</strong>
+              </div>
             </div>
 
             {room.phase === "between" ? (
               <div className="question-card reveal-card">
-                <div className="reveal-icon"><Check size={25} /></div>
-                <div className="eyebrow centered"><span className="eyebrow-line" /> ANSWER REVEALED</div>
+                <div className="reveal-icon">
+                  <Check size={25} />
+                </div>
+                <div className="eyebrow centered">
+                  <span className="eyebrow-line" /> ANSWER REVEALED
+                </div>
                 <h2>Nice one. Get ready!</h2>
                 <div className="correct-answer">
                   Correct answer: <strong>{room.revealedAnswer}</strong>
                 </div>
                 <p className="next-question-copy">
-                  {isLastQuestion ? "Last question coming up!" : `Question ${room.questionIndex + 2} is up next.`}
+                  {isLastQuestion
+                    ? "Last question coming up!"
+                    : `Question ${room.questionIndex + 2} is up next.`}
                 </p>
                 <div className="score-strip">
                   {sortedPlayers.map((player) => (
                     <span className="score-chip" key={player.id}>
-                      {player.username}<strong>{player.score}</strong>
+                      {player.username}
+                      <strong>{player.score}</strong>
                     </span>
                   ))}
                 </div>
@@ -374,105 +449,224 @@ function App() {
             ) : (
               <div className="question-card">
                 <div className="question-meta">
-                  <span>QUESTION <strong>{String(room.questionIndex + 1).padStart(2, "0")}</strong><i> / {String(room.totalQuestions).padStart(2, "0")}</i></span>
-                  <span className="points-label"><Sparkles size={13} /> +10 POINTS</span>
+                  <span>
+                    QUESTION{" "}
+                    <strong>
+                      {String(room.questionIndex + 1).padStart(2, "0")}
+                    </strong>
+                    <i> / {String(room.totalQuestions).padStart(2, "0")}</i>
+                  </span>
+                  <span className="points-label">
+                    <Sparkles size={13} /> +10 POINTS
+                  </span>
                 </div>
                 <div className="progress-track">
-                  <span style={{ width: `${((room.questionIndex + 1) / room.totalQuestions) * 100}%` }} />
+                  <span
+                    style={{
+                      width: `${((room.questionIndex + 1) / room.totalQuestions) * 100}%`,
+                    }}
+                  />
                 </div>
                 <div className="timer-line">
-                  <div className="timer-copy"><Clock3 size={15} /> TIME LEFT</div>
-                  <div aria-label={`${secondsLeft} seconds remaining`} className={`timer-number${secondsLeft <= 3 ? " timer-urgent" : ""}`}>{String(secondsLeft).padStart(2, "0")}<small>s</small></div>
+                  <div className="timer-copy">
+                    <Clock3 size={15} /> TIME LEFT
+                  </div>
+                  <div
+                    aria-label={`${secondsLeft} seconds remaining`}
+                    className={`timer-number${secondsLeft <= 3 ? " timer-urgent" : ""}`}
+                  >
+                    {String(secondsLeft).padStart(2, "0")}
+                    <small>s</small>
+                  </div>
                 </div>
-                <div className="timer-track"><span className={secondsLeft <= 3 ? "timer-track-urgent" : ""} style={{ width: `${timerPercent}%` }} /></div>
+                <div className="timer-track">
+                  <span
+                    className={secondsLeft <= 3 ? "timer-track-urgent" : ""}
+                    style={{ width: `${timerPercent}%` }}
+                  />
+                </div>
                 <h2 className="question-prompt">{room.question?.prompt}</h2>
                 <div className="answer-grid">
                   {room.question?.options.map((option, index) => (
                     <button
                       className={`answer-option${selectedAnswer === index ? " answer-selected" : ""}`}
-                      disabled={hasAnswered || selectedAnswer !== null || secondsLeft === 0}
+                      disabled={
+                        hasAnswered ||
+                        selectedAnswer !== null ||
+                        secondsLeft === 0
+                      }
                       key={option}
                       onClick={() => submitAnswer(index)}
                       type="button"
                     >
-                      <span className="option-letter">{String.fromCharCode(65 + index)}</span>
+                      <span className="option-letter">
+                        {String.fromCharCode(65 + index)}
+                      </span>
                       <span>{option}</span>
-                      {selectedAnswer === index && <Check className="answer-check" size={16} />}
+                      {selectedAnswer === index && (
+                        <Check className="answer-check" size={16} />
+                      )}
                     </button>
                   ))}
                 </div>
                 <div className="question-footer">
-                  <span className="answer-count"><Users size={14} /> {room.players.filter((player) => player.answered).length} of {room.players.length} answered</span>
-                  <span className="answered-label">{hasAnswered ? <><Check size={13} /> ANSWER LOCKED IN</> : "CHOOSE WISELY"}</span>
+                  <span className="answer-count">
+                    <Users size={14} />{" "}
+                    {room.players.filter((player) => player.answered).length} of{" "}
+                    {room.players.length} answered
+                  </span>
+                  <span className="answered-label">
+                    {hasAnswered ? (
+                      <>
+                        <Check size={13} /> ANSWER LOCKED IN
+                      </>
+                    ) : (
+                      "CHOOSE WISELY"
+                    )}
+                  </span>
                 </div>
               </div>
             )}
 
             <aside className="live-scores">
-              <div className="live-scores-heading"><span><Medal size={16} /> LIVE SCORES</span><span>+10 PER CORRECT</span></div>
+              <div className="live-scores-heading">
+                <span>
+                  <Medal size={16} /> LIVE SCORES
+                </span>
+                <span>+10 PER CORRECT</span>
+              </div>
               <div className="live-score-list">
                 {sortedPlayers.map((player, index) => (
                   <div className="live-score-row" key={player.id}>
-                    <span className={`rank-number${index === 0 ? " rank-first" : ""}`}>{String(index + 1).padStart(2, "0")}</span>
-                    <span className="mini-avatar">{player.username.slice(0, 1).toUpperCase()}</span>
-                    <span className="live-player-name">{player.username}{player.id === myId ? <i> (you)</i> : null}</span>
-                    {isPlaying && player.answered && <Check className="live-answered" size={14} />}
-                    <strong className="live-player-score">{player.score}</strong>
+                    <span
+                      className={`rank-number${index === 0 ? " rank-first" : ""}`}
+                    >
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
+                    <span className="mini-avatar">
+                      {player.username.slice(0, 1).toUpperCase()}
+                    </span>
+                    <span className="live-player-name">
+                      {player.username}
+                      {player.id === myId ? <i> (you)</i> : null}
+                    </span>
+                    {isPlaying && player.answered && (
+                      <Check className="live-answered" size={14} />
+                    )}
+                    <strong className="live-player-score">
+                      {player.score}
+                    </strong>
                   </div>
                 ))}
               </div>
             </aside>
-            {error && <p aria-live="polite" className="error-message quiz-error">{error}</p>}
+            {error && (
+              <p aria-live="polite" className="error-message quiz-error">
+                {error}
+              </p>
+            )}
           </section>
         )}
 
         {mode === "game" && room?.phase === "finished" && (
           <section className="results-layout">
             <div className="results-heading">
-              <span className="winner-badge"><Crown size={17} /> GAME COMPLETE</span>
-              <h1>And the<br /><span>bragging</span><br />begins<span className="period">.</span></h1>
+              <span className="winner-badge">
+                <Crown size={17} /> GAME COMPLETE
+              </span>
+              <h1>
+                And the
+                <br />
+                <span>bragging</span>
+                <br />
+                begins<span className="period">.</span>
+              </h1>
               <p className="home-description">
                 That was a good game. Here&apos;s how your crew stacked up.
               </p>
-              <button className="primary-button play-again-button" onClick={leaveGame} type="button">
+              <button
+                className="primary-button play-again-button"
+                onClick={leaveGame}
+                type="button"
+              >
                 <RotateCcw size={16} /> Play again
               </button>
             </div>
             <div className="leaderboard-card">
               <div className="leaderboard-heading">
-                <div><div className="card-kicker">THE FINAL SCORES</div><h2>Leaderboard</h2></div>
+                <div>
+                  <div className="card-kicker">THE FINAL SCORES</div>
+                  <h2>Leaderboard</h2>
+                </div>
                 <span className="leaderboard-code">{room.code}</span>
               </div>
               <div className="podium">
                 {sortedPlayers.slice(0, 3).map((player, index) => (
-                  <div className={`podium-player podium-${index + 1}`} key={player.id}>
-                    <div className={`podium-avatar podium-avatar-${index + 1}`}>{index === 0 ? <Crown size={17} /> : player.username.slice(0, 1).toUpperCase()}</div>
+                  <div
+                    className={`podium-player podium-${index + 1}`}
+                    key={player.id}
+                  >
+                    <div className={`podium-avatar podium-avatar-${index + 1}`}>
+                      {index === 0 ? (
+                        <Crown size={17} />
+                      ) : (
+                        player.username.slice(0, 1).toUpperCase()
+                      )}
+                    </div>
                     <span className="podium-name">{player.username}</span>
-                    <span className="podium-score">{player.score}<small>pts</small></span>
-                    <div className={`podium-block podium-block-${index + 1}`}><span>{index + 1}</span></div>
+                    <span className="podium-score">
+                      {player.score}
+                      <small>pts</small>
+                    </span>
+                    <div className={`podium-block podium-block-${index + 1}`}>
+                      <span>{index + 1}</span>
+                    </div>
                   </div>
                 ))}
               </div>
               <div className="final-list">
                 {sortedPlayers.map((player, index) => (
                   <div className="final-row" key={player.id}>
-                    <span className={`final-rank${index === 0 ? " final-rank-winner" : ""}`}>{String(index + 1).padStart(2, "0")}</span>
-                    <span className="final-avatar">{player.username.slice(0, 1).toUpperCase()}</span>
-                    <span className="final-name">{player.username}{player.id === myId ? <i> (you)</i> : null}</span>
-                    {index === 0 && <span className="winner-label"><Crown size={12} /> WINNER</span>}
-                    <strong className="final-score">{player.score}<small> pts</small></strong>
+                    <span
+                      className={`final-rank${index === 0 ? " final-rank-winner" : ""}`}
+                    >
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
+                    <span className="final-avatar">
+                      {player.username.slice(0, 1).toUpperCase()}
+                    </span>
+                    <span className="final-name">
+                      {player.username}
+                      {player.id === myId ? <i> (you)</i> : null}
+                    </span>
+                    {index === 0 && (
+                      <span className="winner-label">
+                        <Crown size={12} /> WINNER
+                      </span>
+                    )}
+                    <strong className="final-score">
+                      {player.score}
+                      <small> pts</small>
+                    </strong>
                   </div>
                 ))}
               </div>
-              <div className="total-points"><span>MAX POSSIBLE SCORE</span><strong>{room.totalQuestions * 10} PTS</strong></div>
+              <div className="total-points">
+                <span>MAX POSSIBLE SCORE</span>
+                <strong>{room.totalQuestions * 10} PTS</strong>
+              </div>
             </div>
           </section>
         )}
       </div>
 
       <footer className="page-footer">
-        <span>QUIZ CLUB <i>·</i> GOOD GAMES, GOOD COMPANY</span>
-        <span>10 QUESTIONS <i>·</i> 10 SECONDS <i>·</i> 10 POINTS</span>
+        <span>
+          QUIZ CLUB <i>·</i> GOOD GAMES, GOOD COMPANY
+        </span>
+        <span>
+          10 QUESTIONS <i>·</i> 10 SECONDS <i>·</i> 10 POINTS
+        </span>
       </footer>
     </main>
   );
