@@ -17,7 +17,10 @@ import {
   Users,
 } from "lucide-react";
 
-const socket = io(import.meta.env.VITE_SERVER_URL || undefined, {
+const serverUrl =
+  import.meta.env.VITE_SERVER_URL ||
+  (import.meta.env.PROD ? "https://meroquiz-api.onrender.com" : undefined);
+const socket = io(serverUrl, {
   autoConnect: false,
 });
 
@@ -118,7 +121,9 @@ function App() {
     socket.connect();
     socket.once("connect", () => action(cleanName));
     socket.once("connect_error", () => {
-      setError("Couldn't connect to the game server. Try again in a moment.");
+      setError(
+        "Couldn't connect to the game server. Check that VITE_SERVER_URL points to your deployed game server and that CLIENT_ORIGIN allows this site.",
+      );
     });
   }
 
