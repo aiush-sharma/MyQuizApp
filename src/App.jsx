@@ -19,7 +19,7 @@ import {
 
 const serverUrl =
   import.meta.env.VITE_SERVER_URL ||
-  (import.meta.env.PROD ? "https://meroquiz-api.onrender.com" : undefined);
+  (import.meta.env.PROD ? "https://myquizapp-w08z.onrender.com" : undefined);
 const socket = io(serverUrl, {
   autoConnect: false,
 });

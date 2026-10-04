@@ -49,7 +49,7 @@ The Express server serves the production client and handles Socket.IO connection
 
 ## Deploying to Vercel
 
-Vercel hosts the frontend, while the Socket.IO game server needs a persistent Node.js process. The included `render.yaml` configures the backend for Render, including the `https://meroquiz.vercel.app` browser origin. To deploy it, create a Render Blueprint from this repository and deploy the `meroquiz-api` web service. The client uses `https://meroquiz-api.onrender.com` by default in production; if Render assigns a different service URL, set `VITE_SERVER_URL` to that URL in Vercel and redeploy.
+Vercel hosts the frontend, while the Socket.IO game server needs a persistent Node.js process. The included `render.yaml` configures the backend for Render, including the `https://meroquiz.vercel.app` browser origin. To deploy it, create a Render Blueprint from this repository and deploy the `meroquiz-api` web service. The client uses `https://myquizapp-w08z.onrender.com` by default in production; if Render assigns a different service URL, set `VITE_SERVER_URL` to that URL in Vercel and redeploy.
 
 The backend's `/health` endpoint can be used to check that the service is running. If the connection still fails, verify that the backend is deployed and publicly reachable, that its URL uses `https://`, and that `CLIENT_ORIGIN` matches the frontend origin. Vercel preview deployments have different origins and need to be allowed separately if used for testing. Render's free service may take a short time to wake after inactivity.
 
